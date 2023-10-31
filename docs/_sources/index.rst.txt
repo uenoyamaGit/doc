@@ -7,8 +7,20 @@ Welcome to Gitohonjuku_uenoyama's documentation!
 ================================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 4
+   :caption: 技統本塾のやつ:
+   
+   /docs/pageContents/Python_Git_Sphinx/preparationSphinx
+
+
+
+================================================
+
+.. toctree::
+   :maxdepth: 4
+   :caption: お試し系:
+   
+   /docs/pageContents/test/test01
 
 
 
