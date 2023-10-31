@@ -9,7 +9,8 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 REM set BUILDDIR=_build
-set BUILDDIR=.
+REM set BUILDDIR=.
+set BUILDDIR=./docs
 
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
@@ -26,7 +27,8 @@ if errorlevel 9009 (
 
 if "%1" == "" goto help
 
-%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+REM %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+%SPHINXBUILD% -b %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
 :help
