@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python、GitHub、Sphinxの環境構築 &mdash; Gitohonjuku_uenoyama  ドキュメント</title>
+  <title>AWS ECS上に構築するSpringアプリケーション &mdash; Gitohonjuku_uenoyama  ドキュメント</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -17,7 +17,9 @@
         <script src="../../../_static/translations.js?v=4dbe4bdc"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../../genindex.html" />
-    <link rel="search" title="検索" href="../../../search.html" /> 
+    <link rel="search" title="検索" href="../../../search.html" />
+    <link rel="next" title="sphinx やってみた1" href="../test/test01.html" />
+    <link rel="prev" title="Python、GitHub、Sphinxの環境構築" href="../Python_Git_Sphinx/preparationSphinx.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,8 +42,12 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">技統本塾のやつ:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Python_Git_Sphinx/preparationSphinx.html">Python、GitHub、Sphinxの環境構築</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AWS ECS上に構築するSpringアプリケーション</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aws-ecsspring-1">AWS ECS上に構築するSpringアプリケーション(1)</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">お試し系:</span></p>
 <ul>
@@ -62,7 +68,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Python、GitHub、Sphinxの環境構築</li>
+      <li class="breadcrumb-item active">AWS ECS上に構築するSpringアプリケーション</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/docs/pageContents/AWS/AWS.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -72,14 +78,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pythongithubsphinx">
-<h1>Python、GitHub、Sphinxの環境構築<a class="headerlink" href="#pythongithubsphinx" title="Link to this heading">¶</a></h1>
+  <section id="aws-ecsspring">
+<h1>AWS ECS上に構築するSpringアプリケーション<a class="headerlink" href="#aws-ecsspring" title="Link to this heading">¶</a></h1>
 <div class="line-block">
-<div class="line">BXO環境でPython、GitHub、Sphinxの環境を1から構築した記録です。</div>
-<div class="line">色々とハマってるので参考になれば幸いです。</div>
+<div class="line">このメモ、果たしてどこまで続くのか？</div>
 </div>
-<section id="python">
-<h2>Pythonのインストール<a class="headerlink" href="#python" title="Link to this heading">¶</a></h2>
+<section id="aws-ecsspring-1">
+<h2>AWS ECS上に構築するSpringアプリケーション(1)<a class="headerlink" href="#aws-ecsspring-1" title="Link to this heading">¶</a></h2>
+<p>以下のサイトに従ってやります。
+* <a class="reference external" href="https://news.mynavi.jp/techplus/article/techp4354/">AWS ECS上に構築するSpringアプリケーション(1)</a></p>
+<p>1. VPC(Virtual Private Cloud)環境の構築
+さっそくつまずき。
+バージョン差分なのかサイトの情報と異なる項目が多かったですが、
+以下の通りほぼデフォルトで設定してみました。</p>
+<p>＜画像貼る＞</p>
+<p>成功と出たので問題ないような気がします。</p>
+<p>＜画像貼る＞</p>
+<p>続いて「サブネットの作成」画面</p>
+<p>左のメニューから「ルートテーブル」を選択。
+検索画面に先ほど作成したVPCの情報を入れるとなにやらいっぱい出てきました。</p>
+<p>＜画像貼る＞</p>
 <p>特にはまることはなかったです。
 以下サイトを参考にダウンロード・インストールしました。
 PowerShellは特に使わなかったので最後の設定はやってません。</p>
@@ -92,7 +110,10 @@ PowerShellは特に使わなかったので最後の設定はやってません�
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Python_Git_Sphinx/preparationSphinx.html" class="btn btn-neutral float-left" title="Python、GitHub、Sphinxの環境構築" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../test/test01.html" class="btn btn-neutral float-right" title="sphinx やってみた1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
