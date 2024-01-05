@@ -11,6 +11,7 @@ Welcome to Gitohonjuku_uenoyama's documentation!
    :caption: 技統本塾のやつ:
    
    /docs/pageContents/Python_Git_Sphinx/preparationSphinx
+   /docs/pageContents/AWS
 
 
 
