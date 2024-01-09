@@ -1,0 +1,14 @@
+・状態確認
+git status
+
+・htmlファイルの作成
+make html
+
+・gitへadd
+git add .
+
+・gitへcommit
+git commit -m "Nth Commit"
+
+・外部に公開
+git push origin gh-pages
