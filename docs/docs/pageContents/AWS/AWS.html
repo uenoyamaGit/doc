@@ -46,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Python_Git_Sphinx/preparationSphinx.html">Python、GitHub、Sphinxの環境構築</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AWS ECS上に構築するSpringアプリケーション</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#aws-ecsspring-1">AWS ECS上に構築するSpringアプリケーション(1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aws-ecsspring-2">AWS ECS上に構築するSpringアプリケーション(2)</a></li>
 </ul>
 </li>
 </ul>
@@ -91,18 +92,41 @@
 さっそくつまずき。
 バージョン差分なのかサイトの情報と異なる項目が多かったですが、
 以下の通りほぼデフォルトで設定してみました。</p>
-<p>＜画像貼る＞</p>
+<blockquote>
+<div><img alt="../../../_images/0001.png" src="../../../_images/0001.png" />
+<img alt="../../../_images/0002.png" src="../../../_images/0002.png" />
+<img alt="../../../_images/0003.png" src="../../../_images/0003.png" />
+</div></blockquote>
 <p>成功と出たので問題ないような気がします。</p>
-<p>＜画像貼る＞</p>
-<p>続いて「サブネットの作成」画面</p>
-<p>左のメニューから「ルートテーブル」を選択。
+<blockquote>
+<div><img alt="../../../_images/0004.png" src="../../../_images/0004.png" />
+</div></blockquote>
+<p>続いて「サブネットの作成」画面。
+左のメニューから「ルートテーブル」を選択。
 検索画面に先ほど作成したVPCの情報を入れるとなにやらいっぱい出てきました。</p>
-<p>＜画像貼る＞</p>
+<blockquote>
+<div><img alt="../../../_images/0005.png" src="../../../_images/0005.png" />
+</div></blockquote>
 <p>おそらく「プライベート」のルートテーブルが2つ、「パブリック」のルートテーブルが2つ、
 ということなんだと思います。</p>
 <p>続いて、メインが「いいえ」となっているルートテーブルへのサブネットの関連付けですが、
 どれも「明示的な関連付けがないサブネットがありません。すべてのサブネットはルートテーブルに関連付けられています。」
 とあったので、問題なさそう、、と判断して一旦次へ行ってみます。</p>
+<blockquote>
+<div><img alt="../../../_images/0006.png" src="../../../_images/0006.png" />
+<img alt="../../../_images/0007.png" src="../../../_images/0007.png" />
+<img alt="../../../_images/0008.png" src="../../../_images/0008.png" />
+</div></blockquote>
+</section>
+<section id="aws-ecsspring-2">
+<h2>AWS ECS上に構築するSpringアプリケーション(2)<a class="headerlink" href="#aws-ecsspring-2" title="Link to this heading">¶</a></h2>
+<p>以下のサイトに従ってやります。
+* <a class="reference external" href="https://news.mynavi.jp/techplus/article/techp4359/">AWS ECS上に構築するSpringアプリケーション(2)</a></p>
+<p>早速、ALBを準備してみます。</p>
+<blockquote>
+<div><img alt="../../../_images/0009.png" src="../../../_images/0009.png" />
+<img alt="../../../_images/0010.png" src="../../../_images/0010.png" />
+</div></blockquote>
 </section>
 </section>
 
