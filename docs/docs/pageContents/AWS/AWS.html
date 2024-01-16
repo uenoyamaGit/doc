@@ -88,24 +88,63 @@
 <h2>AWS ECS上に構築するSpringアプリケーション(1)<a class="headerlink" href="#aws-ecsspring-1" title="Link to this heading">¶</a></h2>
 <p>以下のサイトに従ってやります。
 * <a class="reference external" href="https://news.mynavi.jp/techplus/article/techp4354/">AWS ECS上に構築するSpringアプリケーション(1)</a></p>
+<p>Elastic IPアドレス割り当てます。特にハマりはなし。</p>
+<blockquote>
+<div><img alt="../../../_images/0001.png" src="../../../_images/0001.png" />
+</div></blockquote>
+<p>続いて、VPCを作成します。
+2つのアベイラビリティゾーンで、それぞれprivateとpublicのサブネットを割り当て。
+ルートテーブルもそれぞれに作ります。
+ちなみに、VPC名に「pub」とつけてしまったのはミス。。pubもpriも同じだっつの。
+こういうところからバグやらエラーやらが生まれるんでしょうね。</p>
+<blockquote>
+<div><img alt="../../../_images/0002.png" src="../../../_images/0002.png" />
+<img alt="../../../_images/0003.png" src="../../../_images/0003.png" />
+</div></blockquote>
+<p>？疑問？
+ルートテーブルってやつの存在が良くわからない。
+なんでpublicだと1つで良くてprivateだとそれぞれ必要なのか？
+？疑問終わり？</p>
+<p>成功と出てきました。</p>
+<blockquote>
+<div><img alt="../../../_images/0004.png" src="../../../_images/0004.png" />
+</div></blockquote>
+<p>左のメニューから「ルートテーブル」を選択。
+検索画面に先ほど作成したVPCの情報を入れると、先ほど作成した4つ分のサブネットが表示されました。</p>
+<blockquote>
+<div><img alt="../../../_images/0005.png" src="../../../_images/0005.png" />
+</div></blockquote>
+<p>メイン「いいえ」となっているルートテーブルへのサブネットの関連付けは、
+どれも「明示的な関連付けがないサブネットがありません。すべてのサブネットはルートテーブルに関連付けられています。」
+とあったので、問題なさそう、、と判断して一旦次へ行ってみます。</p>
+<blockquote>
+<div><img alt="../../../_images/0006.png" src="../../../_images/0006.png" />
+</div></blockquote>
+<p>？疑問？
+↑ルートテーブルの概念が良くわかってないからか、何が正しくて何が正しくないのかよくわからない。
+？疑問終わり？</p>
+<p>～～以下、ボツ要素～～
+2024/1/10に作り直してるので以下はボツのやつです。
+理由はシドニーリージョンに作ってしまったため。
+東京リージョンに作り直してます。</p>
 <p>1. VPC(Virtual Private Cloud)環境の構築
 さっそくつまずき。
 バージョン差分なのかサイトの情報と異なる項目が多かったですが、
 以下の通りほぼデフォルトで設定してみました。</p>
 <blockquote>
-<div><img alt="../../../_images/0001.png" src="../../../_images/0001.png" />
-<img alt="../../../_images/0002.png" src="../../../_images/0002.png" />
-<img alt="../../../_images/0003.png" src="../../../_images/0003.png" />
+<div><img alt="../../../_images/00011.png" src="../../../_images/00011.png" />
+<img alt="../../../_images/00021.png" src="../../../_images/00021.png" />
+<img alt="../../../_images/00031.png" src="../../../_images/00031.png" />
 </div></blockquote>
 <p>成功と出たので問題ないような気がします。</p>
 <blockquote>
-<div><img alt="../../../_images/0004.png" src="../../../_images/0004.png" />
+<div><img alt="../../../_images/00041.png" src="../../../_images/00041.png" />
 </div></blockquote>
 <p>続いて「サブネットの作成」画面。
 左のメニューから「ルートテーブル」を選択。
 検索画面に先ほど作成したVPCの情報を入れるとなにやらいっぱい出てきました。</p>
 <blockquote>
-<div><img alt="../../../_images/0005.png" src="../../../_images/0005.png" />
+<div><img alt="../../../_images/00051.png" src="../../../_images/00051.png" />
 </div></blockquote>
 <p>おそらく「プライベート」のルートテーブルが2つ、「パブリック」のルートテーブルが2つ、
 ということなんだと思います。</p>
@@ -113,20 +152,75 @@
 どれも「明示的な関連付けがないサブネットがありません。すべてのサブネットはルートテーブルに関連付けられています。」
 とあったので、問題なさそう、、と判断して一旦次へ行ってみます。</p>
 <blockquote>
-<div><img alt="../../../_images/0006.png" src="../../../_images/0006.png" />
+<div><img alt="../../../_images/00061.png" src="../../../_images/00061.png" />
 <img alt="../../../_images/0007.png" src="../../../_images/0007.png" />
 <img alt="../../../_images/0008.png" src="../../../_images/0008.png" />
 </div></blockquote>
+<p>～～ボツ要素終わり～～</p>
 </section>
 <section id="aws-ecsspring-2">
 <h2>AWS ECS上に構築するSpringアプリケーション(2)<a class="headerlink" href="#aws-ecsspring-2" title="Link to this heading">¶</a></h2>
 <p>以下のサイトに従ってやります。
 * <a class="reference external" href="https://news.mynavi.jp/techplus/article/techp4359/">AWS ECS上に構築するSpringアプリケーション(2)</a></p>
-<p>早速、ALBを準備してみます。</p>
+<p>早速、ALBを準備してみます。
+まずはpublic用のロードバランサから。
+サブネット対象は、(1)で作成したサブネットのうちpublicにあたるやつを指定しました。</p>
+<blockquote>
+<div><img alt="../../../_images/00071.png" src="../../../_images/00071.png" />
+<img alt="../../../_images/00081.png" src="../../../_images/00081.png" />
+</div></blockquote>
+<p>続いて、セキュリティグループを新規作成します。</p>
 <blockquote>
 <div><img alt="../../../_images/0009.png" src="../../../_images/0009.png" />
-<img alt="../../../_images/0010.png" src="../../../_images/0010.png" />
 </div></blockquote>
+<p>正直あんまりよくわかりませんでしたが、まあほぼほぼサイトの通りかと。</p>
+<blockquote>
+<div><img alt="../../../_images/0010.png" src="../../../_images/0010.png" />
+</div></blockquote>
+<p>正常作成となったので、まあ一旦これでやります。
+後々設定ミスってたら変えられるでしょうきっと（）。</p>
+<blockquote>
+<div><img alt="../../../_images/0011.png" src="../../../_images/0011.png" />
+</div></blockquote>
+<p>続いて、リスナーとルーティングの設定。
+public用なんですが、今回はhttp80で受付。
+本当は外部からアクセスなのでおそらくhttpsで指定したほうが良いんでしょうね。</p>
+<blockquote>
+<div><img alt="../../../_images/0012.png" src="../../../_images/0012.png" />
+</div></blockquote>
+<p>！注意！
+後から気づいたんですが、アウトバウンドルール（内→外）じゃなくて、
+インバウンドルール（外→内）を設定すべきじゃろ？
+と思ったのでインバウンドルールを追加してアウトバウンドルールは消しました。
+インバウンドルールは以下の通り。</p>
+<blockquote>
+<div><img alt="../../../_images/0016.png" src="../../../_images/0016.png" />
+</div></blockquote>
+<p>0.0.0.0指定だとなんでも受け付けちゃうから危ないよ！と警告出てますが一旦ガバガバセキュリティで行こうと思います。
+！注意終わり！</p>
+<p>ここでは更にターゲットグループを新たに作成する必要ありそうです。</p>
+<blockquote>
+<div><img alt="../../../_images/0013.png" src="../../../_images/0013.png" />
+</div></blockquote>
+<p>オリジナルな部分はヘルスチェック用のパスですね。
+今後のアプリケーション作成の際に意識すべき点なような気がします。
+こちらのパスにindex.htmlを置かなきゃいけないことを覚えておきます。</p>
+<blockquote>
+<div><img alt="../../../_images/0014.png" src="../../../_images/0014.png" />
+</div></blockquote>
+<p>作成したターゲットグループをリスナーに紐づけて完成です。多分。</p>
+<blockquote>
+<div><img alt="../../../_images/0015.png" src="../../../_images/0015.png" />
+</div></blockquote>
+<p>続いてprivate側のALBも作ってみます。
+内部向けなのでIP気を付けたりhttp接続にしたりprivate用のサブネットなどに留意すれば同じようにできるんではないかと。
+特筆すべき差分があったらメモします。</p>
+<p>メモは、
+・セキュリティグループはprivate用のものを作成
+・ターゲットグループはpublicと同じで良い？
+くらいですね。</p>
+<p>後々ミスってたら戻ってくるかも。
+一旦public、private共に作成完了です。</p>
 </section>
 </section>
 

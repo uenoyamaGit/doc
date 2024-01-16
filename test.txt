@@ -12,3 +12,6 @@ git commit -m "Nth Commit"
 
 ・外部に公開
 git push origin gh-pages
+
+・ページ
+https://uenoyamagit.github.io/doc/
